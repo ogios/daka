@@ -8,7 +8,7 @@
 ### POST 请求头与报文
 
 报文中的关键信息
-报文中的全部内容见文件`defaultSetting.json`
+> 报文中的全部内容见文件`defaultSetting.json`
 
 
 | 键      | 意义               | 默认值    |
