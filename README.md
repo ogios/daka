@@ -55,7 +55,7 @@
 * com/example/clockin/setting_Adapter.java
 * com/example/clockin/setting_item.java
 
-在Setting页面配置好报文后点击SAVE按钮会自动重新请求token
+在Setting页面配置好报文后点击SAVE按钮会自动重新请求token  
 如果配置乱套了点击RESET重新设置报文
 
 配置完成后点击Clockin页面的大按钮，如果打卡成功或当日已经打过卡则会被记录下来直到明天刷新
