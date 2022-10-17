@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/AndroidProject/clockin/app/src/main/res/drawable/btn_animate_selector.xml" value="0.1" />
+        <entry key="..\:/AndroidProject/clockin/app/src/main/res/drawable/btn_selector.xml" value="0.181" />
+        <entry key="..\:/AndroidProject/clockin/app/src/main/res/drawable/edittext_underline.xml" value="0.1" />
+        <entry key="..\:/AndroidProject/clockin/app/src/main/res/drawable/ic_baseline_publish_24.xml" value="0.181" />
+        <entry key="..\:/AndroidProject/clockin/app/src/main/res/drawable/item_selector.xml" value="0.159" />
+        <entry key="..\:/AndroidProject/clockin/app/src/main/res/drawable/recycler_selector.xml" value="0.159" />
+        <entry key="..\:/AndroidProject/clockin/app/src/main/res/drawable/test.xml" value="0.181" />
+        <entry key="..\:/AndroidProject/clockin/app/src/main/res/layout-v28/fragment_setting.xml" value="0.2644927536231884" />
+        <entry key="..\:/AndroidProject/clockin/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/AndroidProject/clockin/app/src/main/res/layout/fragment_clockin.xml" value="0.264" />
+        <entry key="..\:/AndroidProject/clockin/app/src/main/res/layout/fragment_setting.xml" value="0.259375" />
+        <entry key="..\:/AndroidProject/clockin/app/src/main/res/layout/json_item.xml" value="0.2644927536231884" />
+        <entry key="..\:/AndroidProject/clockin/app/src/main/res/layout/navi_header.xml" value="0.2644927536231884" />
+        <entry key="..\:/AndroidProject/clockin/app/src/main/res/menu/navi_menu.xml" value="0.27395833333333336" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

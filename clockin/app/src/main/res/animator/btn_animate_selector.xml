@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" >
+        <set
+            android:ordering="together">
+            <objectAnimator
+                android:startOffset="@integer/material_motion_duration_short_1"
+                android:duration="@integer/material_motion_duration_short_1"
+                android:propertyName="translationZ"
+                android:valueTo="20dp" />
+            <objectAnimator
+                android:startOffset="@integer/material_motion_duration_short_1"
+                android:duration="@integer/material_motion_duration_short_1"
+                android:propertyName="scaleX"
+                android:valueTo="0.9" />
+            <objectAnimator
+                android:startOffset="@integer/material_motion_duration_short_1"
+                android:duration="@integer/material_motion_duration_short_1"
+                android:propertyName="scaleY"
+                android:valueTo="0.9" />
+
+        </set>
+    </item>
+
+    <item android:state_pressed="false">
+        <set>
+            <objectAnimator
+                android:duration="@integer/material_motion_duration_short_1"
+                android:propertyName="scaleX"
+                android:valueTo="1.0" />
+            <objectAnimator
+                android:duration="@integer/material_motion_duration_short_1"
+                android:propertyName="scaleY"
+                android:valueTo="1.0" />
+            <objectAnimator
+                android:duration="@integer/material_motion_duration_short_1"
+                android:propertyName="translationZ"
+                android:valueTo="0dp" />
+        </set>
+    </item>
+</selector>
+

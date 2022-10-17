@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".clockin"
+    android:background="@color/purple_500"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/isClockin"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="test"
+        android:textSize="18dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/teal_200"
+        android:layout_marginBottom="100dp"/>
+
+
+    <ImageButton
+        android:id="@+id/send"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/up"
+        android:scaleType="fitCenter"
+        android:background="@drawable/btn_selector"
+        android:elevation="10dp"/>
+
+<!--    <Button-->
+<!--        android:id="@+id/test"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="test"/>-->
+
+</LinearLayout>
