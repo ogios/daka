@@ -152,12 +152,6 @@ class stu:
                     self.print("登陆过期，等待重新申请token")
                     OUT_OF_DATES += [self]
                     return 0
-                    # if self.isTokenCheck:
-                    #     return 0
-                    # else:
-                    #     self.isTokenCheck = True
-                    #     if self.getToken() == 1:
-                    #         return self._clockIn()
 
                 elif "今日已登记" in js["msg"]:
                     self.print(js["msg"])
@@ -182,6 +176,16 @@ def getUsers():
     return db.fetchall()
 
 
+def createThreads(users):
+    ths = []
+    for i in users:
+        th = Thread(target=ClockIn, args=(i,))
+        th.daemon = True
+        th.start()
+        ths += [th]
+    return ths
+
+
 def createUsers(uids):
     users = []
     for i in uids:
@@ -198,30 +202,26 @@ def ClockIn(user: stu):
 def main():
     uids = [i[1] for i in getUsers()]
     users = createUsers(uids)
-    # for i in uids:
-    #     user = createUser()
-    #     if user:
-    #         users += [user]
-    ths = []
-    for i in users:
-        th = Thread(target=ClockIn, args=(i,))
-        th.daemon = True
-        th.start()
-        ths += [th]
+    ths = createThreads(users)
     for i in ths:
         i.join()
-    for i in OUT_OF_DATES:
-        if i.getToken():
-            i.clockIn()
+    if OUT_OF_DATES:
+        for i in OUT_OF_DATES:
+            i.getToken()
+        ths = createThreads(OUT_OF_DATES)
+        for i in ths:
+            i.join()
 
 
 if __name__ == "__main__":
-    conn = sqlite3.connect("test", check_same_thread=False)
-    db = conn.cursor()
     while 1:
         print(uop("时间检查"))
         TIME_NOW = time.strftime("%H", time.localtime(time.time()))
         if TIME_NOW == "6" or TIME_NOW == "7":
+            conn = sqlite3.connect("test", check_same_thread=False)
+            db = conn.cursor()
             print(uop(color("开始打卡", "green")))
             main()
+            db.close()
+            conn.close()
         time.sleep(3600)

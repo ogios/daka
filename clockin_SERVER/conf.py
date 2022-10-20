@@ -2,7 +2,6 @@
 
 import sqlite3
 import sys
-# import sys
 DEFAULT_DATA = {
     "fxdj": "低风险地区",
     "sfyz": "0",
@@ -43,7 +42,6 @@ DEFAULT_DATA = {
     "mqsxdz": "西安欧亚学院"
 }
 
-# DEFAULT_ENCODING = sys.getdefaultencoding()
 data = {
     "fxdq": "风险地区",
     "mqszd": "目前所在地",
@@ -96,18 +94,6 @@ MAIN_PAGE = color(MAIN_PAGE, "green")
 PAGE_2 = color(PAGE_2, "green")
 
 
-# print(options)
-# def form(options: str):
-#     options = options.split("\n")
-#     MAX_LENGTH = 0
-#     for i in options:
-#         if MAX_LENGTH < len(i):
-#             MAX_LENGTH = len(i)
-#     ht = "+"+"-"*(MAX_LENGTH+2)+"+"
-#     body = "\n".join(["| "+f"{i:<{MAX_LENGTH}}"+" |" for i in options])
-#     return ht+"\n"+body+"\n"+ht
-
-
 USER_INFO = "UserInfo"
 USER_DATA = "UserData"
 
@@ -121,7 +107,7 @@ def addUser(uid, pwd):
         print("数据已更新")
         return 1
     else:
-        db.execute(f"insert into UserInfo(uid,pwd) values({uid},{pwd})")
+        db.execute(f"insert into UserInfo(uid,pwd) values('{uid}','{pwd}')")
         print(db.fetchall())
         conn.commit()
         return 1
@@ -216,7 +202,7 @@ def ChangeUserData():
 
 
 def addEmptyData(uid):
-    db.execute(f"insert into UserData(uid) values({uid})")
+    db.execute(f"insert into UserData(uid) values('{uid}')")
     conn.commit()
 
 
