@@ -34,13 +34,13 @@ public class Tools {
         String[] nowDate = date.split("-");
 
         int isover = 0;
-        for (int i=0; i< oldDate.length; i++){
-            if (i==2){
-                if (Integer.parseInt(oldDate[i]) > Integer.parseInt(nowDate[i])){
+        for (int i = 0; i < oldDate.length; i++) {
+            if (i == 2) {
+                if (Integer.parseInt(nowDate[i]) > Integer.parseInt(oldDate[i])) {
                     isover++;
                 }
             } else {
-                if (Integer.parseInt(oldDate[i]) >= Integer.parseInt(nowDate[i])){
+                if (Integer.parseInt(nowDate[i]) >= Integer.parseInt(oldDate[i])) {
                     isover++;
                 }
             }

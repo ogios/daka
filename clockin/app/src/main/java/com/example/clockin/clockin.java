@@ -77,6 +77,7 @@ public class clockin extends Fragment {
         unpressed.setDuration(50);
 
         isClockin = view.findViewById(R.id.isClockin);
+        Log.d(TAG, "onCreateView: START TO EXAM!!!!!!!!!!!");
         examClockin();
 
         imageButton = view.findViewById(R.id.send);
@@ -129,8 +130,11 @@ public class clockin extends Fragment {
     }
 
     public void examClockin(){
-        if (!accounts.getString("dayclockTime","").equals("")){
-            if (Tools.isOverTime(accounts.getString("dayclockTime", ""))){
+        String date = accounts.getString("dayclockTime","");
+        Log.d(TAG, "examClockin: "+date);
+        if (!date.equals("")){
+            Log.d(TAG, "examClockin: "+Tools.isOverTime(date));
+            if (Tools.isOverTime(date)){
                 changeClockin(0);
             } else {
                 changeClockin(1);
