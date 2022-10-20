@@ -140,6 +140,7 @@ class stu:
 
     def _clockIn(self):
         global URL_CLOCKIN
+        global OUT_OF_DATES
         res = requests.post(URL_CLOCKIN, headers=self.headers,
                             data=json.dumps(self.data))
         js = res.json()
@@ -148,7 +149,7 @@ class stu:
                 self.changeClockin(1)
                 return 1
             else:
-                if "登陆过期" in js["msg"]:
+                if "登陆过期" in js["msg"] or "填写信息有误" in js["msg"]:
                     self.print("登陆过期，等待重新申请token")
                     OUT_OF_DATES += [self]
                     return 0
@@ -215,13 +216,17 @@ def main():
 
 if __name__ == "__main__":
     while 1:
-        print(uop("时间检查"))
+        print(uop("时间检查... "), end="")
         TIME_NOW = time.strftime("%H", time.localtime(time.time()))
         if TIME_NOW == "6" or TIME_NOW == "7":
+            print("yes.")
             conn = sqlite3.connect("test", check_same_thread=False)
             db = conn.cursor()
             print(uop(color("开始打卡", "green")))
             main()
             db.close()
             conn.close()
+            print(uop("等待下次检测"))
+        else:
+            print("no.")
         time.sleep(3600)

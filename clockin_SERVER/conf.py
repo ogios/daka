@@ -48,7 +48,7 @@ data = {
     "xxdz": "详细地址",
     "xm": "姓名",
     "xh": "学号",
-    "jtzz": "家庭住址",
+    "jtzz": "家庭住址(省市)",
     "lxdh": "联系电话",
     "sfzs": "是否在陕西",
     "mqsxdz": "目前陕西地址",
@@ -185,7 +185,7 @@ def ChangeUserData():
     tmp["xh"] = res
     uid = res
 
-    for i in ["xm", "xxdz", "lxdh", "jtzz"]:
+    for i in ["xm", "lxdh", "jtzz", "xxdz"]:
         res = input(color(data[i]+":\n>>> ", "green"))
         tmp[i] = res
     if not getData(uid):
