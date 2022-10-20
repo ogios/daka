@@ -4,6 +4,7 @@ import requests
 import json
 import time
 import sqlite3
+import click
 
 from conf import DEFAULT_DATA, color
 

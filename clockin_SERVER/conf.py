@@ -76,6 +76,7 @@ MAIN_PAGE = '''
 | 2. 修改用户配置
 | 3. 删除用户
 | 4. 退出
+| 5. 已有用户
 +----------------
 >>> '''
 
@@ -255,6 +256,10 @@ def main():
                 main_DeleteUser()
             case "4":
                 sys.exit()
+            case "5":
+                uids = [i[1] for i in getUsers()]
+                for i in uids:
+                    print(" -"+i)
             case _:
                 print("输入有误!")
 
