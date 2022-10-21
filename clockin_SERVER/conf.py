@@ -185,20 +185,22 @@ def ChangeUserData():
     tmp["uid"] = res
     tmp["xh"] = res
     uid = res
-
-    for i in ["xm", "lxdh", "jtzz", "xxdz"]:
-        res = input(color(data[i]+":\n>>> ", "green"))
-        tmp[i] = res
-    if not getData(uid):
-        db.execute(
-            f"insert into UserData{str(tuple(tmp.keys()))} values{str(tuple(tmp.values()))}")
+    if getUser(uid):
+        for i in ["xm", "lxdh", "jtzz", "xxdz"]:
+            res = input(color(data[i]+":\n>>> ", "green"))
+            tmp[i] = res
+        if not getData(uid):
+            db.execute(
+                f"insert into UserData{str(tuple(tmp.keys()))} values{str(tuple(tmp.values()))}")
+        else:
+            set = "set "
+            for i in tmp:
+                set += f"{i}='{tmp[i]}',"
+            set = set[:-1]
+            db.execute(f"update UserData {set} where uid='{uid}'")
+        conn.commit()
     else:
-        set = "set "
-        for i in tmp:
-            set += f"{i}='{tmp[i]}',"
-        set = set[:-1]
-        db.execute(f"update UserData {set} where uid='{uid}'")
-    conn.commit()
+        print("学号不匹配")
     return 1
 
 

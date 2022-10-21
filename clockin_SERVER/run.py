@@ -4,9 +4,16 @@ import requests
 import json
 import time
 import sqlite3
-
+import os
+import logging
+import sys
+import traceback
 from conf import DEFAULT_DATA, color
 
+logging.basicConfig(level=logging.INFO, filename="daka.log")
+
+with open("pid", "w") as f:
+    f.write(str(os.getpid()))
 
 global URL_LOGIN
 global URL_CLOCKIN
@@ -46,8 +53,8 @@ def getColumns(table):
 
 
 def putToken(uid, token):
-    print(uid)
-    print(token)
+    logging.info(uid)
+    logging.info(token)
     db.execute(f"update UserInfo set token='{token}' where uid='{uid}'")
     conn.commit()
 
@@ -73,7 +80,7 @@ class stu:
 
     def initData(self):
         if getUser(self.uid) and getData(self.uid):
-            # print(getUser(self.uid))
+            # logging.info(getUser(self.uid))
             self.pwd = getUser(self.uid)[0][2]
             self.data = DEFAULT_DATA.copy()
             self.userdata = getData(self.uid)[0][2:]
@@ -92,11 +99,11 @@ class stu:
                 }
             return self
         else:
-            self.print(self.uid+"用户不存在")
+            logging.info(logging.info(self.print(self.uid+"用户不存在")))
             return None
 
-    def print(self, string) -> str:
-        print(self.uid+" - "+string)
+    def print(self, string):
+        return self.uid+" - "+string
 
     def getToken(self):
         global URL_LOGIN
@@ -120,23 +127,23 @@ class stu:
                     "token": token,
                 }
                 putToken(self.uid, token)
-                self.print("token请求成功")
+                logging.info(self.print("token请求成功"))
                 return 1
             else:
-                self.print("token请求出错 - "+res["msg"])
+                logging.info(self.print("token请求出错 - "+res["msg"]))
                 return 0
 
         else:
-            self.print("请求", res.status_code)
+            logging.info(self.print("请求"+str(_token.status_code)))
         return 0
 
     def clockIn(self):
 
         if self.token:
             if self._clockIn() == 1:
-                self.print("已打卡")
+                logging.info(self.print("已打卡"))
             else:
-                self.print("打卡失败")
+                logging.info(self.print("打卡失败"))
 
     def _clockIn(self):
         global URL_CLOCKIN
@@ -150,19 +157,19 @@ class stu:
                 return 1
             else:
                 if "登陆过期" in js["msg"] or "填写信息有误" in js["msg"]:
-                    self.print("登陆过期，等待重新申请token")
+                    logging.info(self.print("登陆过期，等待重新申请token"))
                     OUT_OF_DATES += [self]
                     return 0
 
                 elif "今日已登记" in js["msg"]:
-                    self.print(js["msg"])
+                    logging.info(self.print(js["msg"]))
                     self.changeClockin(1)
                     return 1
                 else:
-                    self.print(js["msg"])
+                    logging.info(self.print(js["msg"]))
                     return 0
         else:
-            self.print("POST请求失败 - "+res.text)
+            logging.info(self.print("POST请求失败 - "+res.text))
             return 0
 
     def changeClockin(self, isclock):
@@ -203,6 +210,8 @@ def ClockIn(user: stu):
 def main():
     uids = [i[1] for i in getUsers()]
     users = createUsers(uids)
+    if not users:
+        logging.info("无用户存在")
     ths = createThreads(users)
     for i in ths:
         i.join()
@@ -215,18 +224,23 @@ def main():
 
 
 if __name__ == "__main__":
-    while 1:
-        print(uop("时间检查... "), end="")
-        TIME_NOW = time.strftime("%H", time.localtime(time.time()))
-        if TIME_NOW == "6" or TIME_NOW == "7":
-            print("yes.")
-            conn = sqlite3.connect("test", check_same_thread=False)
-            db = conn.cursor()
-            print(uop(color("开始打卡", "green")))
-            main()
-            db.close()
-            conn.close()
-            print(uop("等待下次检测"))
-        else:
-            print("no.")
-        time.sleep(3600)
+    try:
+        while 1:
+            # logging.info()
+            start = uop("时间检查... ")
+            TIME_NOW = time.strftime("%H", time.localtime(time.time()))
+            if TIME_NOW == "6" or TIME_NOW == "7":
+                logging.info(start+"yes.")
+                conn = sqlite3.connect("test", check_same_thread=False)
+                db = conn.cursor()
+                logging.info(uop(color("开始打卡", "green")))
+                main()
+                db.close()
+                conn.close()
+                logging.info(uop("等待下次检测"))
+            else:
+                logging.info(start+"no.")
+            # break
+            time.sleep(3600)
+    except Exception as e:
+        logging.exception(traceback.format_exc())
