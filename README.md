@@ -118,7 +118,10 @@ $ python3 ./conf.py
 提取数据后检测token并打卡，如果token过期则重新请求再打卡
 
 ```python
-$ python3 ./run.py
+$ python3 ./run.py 2>%1 &
+或者
+$ ./start.sh
 ```
 
+运行后python程序的pid会保存在同文件夹下的pid文件中，运行checkStatus.sh可以看到程序是否在运行
 
