@@ -122,6 +122,12 @@ $ python3 ./run.py 2>%1 &
 或者
 $ ./start.sh
 ```
+`start.sh` 的python环境需要配置
+```shell
+$ vim ./start.sh
 
+PY_PATH="/home/moiiii/app/python/bin/python3" #默认
+PY_PATH="<修改为你的python环境或系统/usr/bin/下默认的python环境>"
+```
 运行后python程序的pid会保存在同文件夹下的pid文件中，运行checkStatus.sh可以看到程序是否在运行
 
