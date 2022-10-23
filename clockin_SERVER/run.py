@@ -229,7 +229,7 @@ if __name__ == "__main__":
             # logging.info()
             start = uop("时间检查... ")
             TIME_NOW = time.strftime("%H", time.localtime(time.time()))
-            if TIME_NOW == "6" or TIME_NOW == "7":
+            if TIME_NOW == "06" or TIME_NOW == "07":
                 logging.info(start+"yes.")
                 conn = sqlite3.connect("test", check_same_thread=False)
                 db = conn.cursor()
